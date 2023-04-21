@@ -224,20 +224,25 @@ In this modified version of the List component:
 1. The items prop type is defined correctly using PropTypes.arrayOf and PropTypes.shape: 
 By defining the prop type using PropTypes.arrayOf and PropTypes.shape, we can provide more detailed information about the structure of the items array. 
 This makes it easier to spot errors and ensures that the component is used correctly.
+
 2. The setSelectedIndex hook is initialized with a default value of null:
 By providing a default value for setSelectedIndex, we can avoid potential bugs that could arise if the value is undefined or null. This also makes the 
 code more explicit and easier to read.
+
 3. The onClickHandler prop in the SingleListItem component is defined as a function that calls onClickHandler with the index as 
 an argument using a separate handleClick function:
 By defining a separate handleClick function and passing it to onClickHandler, we can avoid unnecessary re-renders of the SingleListItem component due 
 to changes in the onClickHandler function reference. This optimization can improve performance, especially if the List component contains a large 
 number of items.
+
 4. The isSelected prop in the SingleListItem component is now correctly defined as a boolean expression using selectedIndex === index:
 By using selectedIndex === index to define the isSelected prop in the SingleListItem component, we ensure that only the selected item is highlighted. 
 In the original code, the isSelected prop was always truthy, which would cause all items to be highlighted.
+
 5. The key prop has been added to the SingleListItem component, set to the item's id:
 By adding a unique key to each SingleListItem component, we help React identify which items have changed, been added, or been removed. 
 This allows React to update the DOM more efficiently, improving performance.
+
 6. Memoization has been removed since it's not necessary in this case and could actually cause more harm than good in terms of performance:
 In the original code, the SingleListItem and ListComponent components were memoized using React.memo(). However, memoization should only be used when 
 necessary, as it can sometimes lead to subtle bugs. In this case, memoization is not necessary, as the component is already optimized using other techniques.
